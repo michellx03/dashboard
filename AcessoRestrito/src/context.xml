@@ -118,8 +118,12 @@
 			pattern="/rest/user/list/" access="hasRole('ADMIN')" />
 		<security:intercept-url method="POST"
 			pattern="/rest/user/Alteracao" access="hasRole('ADMIN')" />
-			<security:intercept-url method="GET"
+		<security:intercept-url method="GET"
 			pattern="/rest/noticia/list" access="hasRole('NOTICIA')" />
+		<security:intercept-url method="GET"
+			pattern="/rest/noticia/alteracao" access="hasRole('NOTICIA')" />
+		<security:intercept-url method="POST"
+			pattern="/rest/noticia/alterar" access="hasRole('NOTICIA')" />	
 	</security:http>
 
 	<bean id="unauthorizedEntryPoint"

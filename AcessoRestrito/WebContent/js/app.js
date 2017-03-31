@@ -22,6 +22,14 @@ angular
 
 							});
 							$routeProvider
+							.when(
+									'/NoticiaAlteracao/:id',
+									{
+										templateUrl : 'partials/Noticia/Alteracao.html',
+										controller : NoticiaAlteracaoController,
+
+									});
+							$routeProvider
 									.when(
 											'/UsuarioAlteracao/:id',
 											{

@@ -32,7 +32,7 @@ function NoticiaConsultaController($scope, $http, $routeParams, $location) {
 
 function NoticiaCadastroController($scope, $http,  $location) {
 
-	$scope.Cadastrar = function() {
+	$scope.Cadastrar = function(id) {
 
 		var Noticia = {
 			notiNoticia : $scope.notiNoticia,
@@ -51,4 +51,37 @@ function NoticiaCadastroController($scope, $http,  $location) {
 
 	};
 
+}
+
+function NoticiaAlteracaoController($scope, $http, $routeParams, $location) {
+	//alert($routeParams.id);
+
+			$http({
+				method : "GET",
+				url : '/AcessoRestrito/rest/noticia/alteracao?id='+$routeParams.id+'',
+				cache : false
+			}).success(function(data) {
+				$scope.notiNoticia = data.notiNoticia;
+				$scope.notiFoto = data.notiFoto;
+			});
+			
+			$scope.Alterar = function() {
+
+				var Noticia = {
+					notiId : $routeParams.id,
+					notiNoticia : $scope.notiNoticia,
+					notiFoto : $scope.notiFoto
+				}
+
+					$http({
+						method : "POST",
+						url : '/AcessoRestrito/rest/noticia/alterar',
+						data : Noticia,
+						cache : false
+					}).success(function(data) {
+						$location.path("/NoticiaConsulta");
+						$('#showToastSucesso').click();
+					});
+
+				}
 }

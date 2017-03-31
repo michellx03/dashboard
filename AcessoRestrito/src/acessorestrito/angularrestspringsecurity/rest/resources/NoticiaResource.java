@@ -30,6 +30,8 @@ import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import java.awt.print.Printable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,50 +62,28 @@ public class NoticiaResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Noticia Cadastrar(Noticia noticia) {
-		System.out.println("teste"+noticia.getNotiNoticia());
+		
 		return this.noticiaDaoInterface.save(noticia);
 
 	}
-
-	/*
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/list/{id}")
-	public Usuario read(@PathParam("id") Long id) {
-		this.logger.info("read(): " + id);
-
-		Usuario usuario = this.userDaoInterface.find(id);
-
-		if (usuario == null) {
-			throw new WebApplicationException(404);
-		}
-		this.logger.info("toles: " + usuario.getRoles());
-
-		return usuario;
-	}*/
-
-	/*
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/alteracao")
+	public Noticia Alterar(@QueryParam("id") Integer id) {
+	//System.out.println("xvideo"+id);
+	return this.noticiaDaoInterface.find(id);
+}
+	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/Alteracao")
-	public Usuario Alterar(Usuario usuario) {
-
-		this.logger.info("update():");
-		Usuario user = this.userDaoInterface.find(usuario.getId());
-
-		String senhaMD5;
-
-		if (user.getPassword().equals(usuario.getPassword()))
-			senhaMD5 = usuario.getPassword();
-		else
-			senhaMD5 = passwordEncoder.encode(usuario.getPassword()).toString();
-
-		usuario.setPassword(senhaMD5);
-
-		return this.userDaoInterface.save(usuario);
-
-	}*/
+	@Path("/alterar")
+	public Noticia Alteracao(Noticia noticia) {
+	
+	return this.noticiaDaoInterface.save(noticia);
+}
 
 
 	@DELETE
